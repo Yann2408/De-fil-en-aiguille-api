@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'fistname',
+        'lastname',
         'email',
         'password',
+        'is_superadmin',
     ];
 
     /**
@@ -41,4 +43,44 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function picture()
+    {
+        return $this->morphOne(Picture::class, 'support');
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function to_buy_lists()
+    {
+        return $this->hasMany(To_buy_list::class);
+    }
+
+    public function patterns()
+    {
+        return $this->hasMany(Pattern::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function tissus()
+    {
+        return $this->hasMany(Tissu::class);
+    }
+
+    public function inspirations()
+    {
+        return $this->hasMany(Inspiration::class);
+    }
+
+    public function person_measurements()
+    {
+        return $this->hasMany(Person_measurement::class);
+    }
 }
