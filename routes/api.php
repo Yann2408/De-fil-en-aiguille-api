@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
@@ -26,5 +27,14 @@ Route::group(
     [
         'middleware' => ['auth:sanctum'],
     ],
+    function ($router) {
+
+        Route::group(
+            ['prefix' => '/home'],
+            function ($router) {
+                Route::get('/', [HomeController::class, 'home']);
+            }
+        );
+    }
 );
 
