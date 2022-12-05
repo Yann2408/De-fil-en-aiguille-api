@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TissuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +33,13 @@ Route::group(
             ['prefix' => '/home'],
             function ($router) {
                 Route::get('/', [HomeController::class, 'home']);
+            }
+        );
+
+        Route::group(
+            ['prefix' => '/tissus'],
+            function ($router) {
+                Route::get('/', [TissuController::class, 'getTissus']);
             }
         );
     }
