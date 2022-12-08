@@ -10,8 +10,8 @@ use App\Models\Pattern;
 use App\Models\Person_measurement;
 use App\Models\Project;
 use App\Models\Tissu;
-use App\Models\tissu_type;
-use App\Models\To_buy_list;
+use App\Models\tissuType;
+use App\Models\ToBuyList;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         $user->is_superadmin = true;
         $user->save();
 
-        $tissuType = new tissu_type;
+        $tissuType = new tissuType;
         $tissuType->name = "jean";
         $tissuType->save();
 
@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
         $category3->user_id = $user->id;
         $category3->save();
 
-        $toBuyList = new To_buy_list;
+        $toBuyList = new ToBuyList;
         $toBuyList->name = "tissu bleu";
         $toBuyList->quantity = 3;
         $toBuyList->shop = "mercerie du centre ville";

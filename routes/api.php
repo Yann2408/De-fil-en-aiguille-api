@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TissuController;
+use App\Http\Controllers\TissuTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,13 @@ Route::group(
             ['prefix' => '/tissus'],
             function ($router) {
                 Route::get('/', [TissuController::class, 'getTissus']);
+            }
+        );
+
+        Route::group(
+            ['prefix' => '/tissu-types'],
+            function ($router) {
+                Route::get('/', [TissuTypeController::class, 'getTissuTypes']);
             }
         );
     }
