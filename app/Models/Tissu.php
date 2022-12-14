@@ -26,6 +26,6 @@ class Tissu extends Model
 
     public function tissu_type()
     {
-        return $this->belongsTo(tissu_type::class);
+        return $this->belongsTo(TissuType::class);
     }
 }

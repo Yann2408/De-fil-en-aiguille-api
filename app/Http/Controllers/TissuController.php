@@ -10,7 +10,7 @@ class TissuController extends Controller
 
     public function getTissus()
     {
-        $tissus = Tissu::all()->with('tissu_type');
+        $tissus = Tissu::with('tissu_type')->get();
 
      return response()->json($tissus, 200);
     }

@@ -10,7 +10,7 @@ use App\Models\Pattern;
 use App\Models\Person_measurement;
 use App\Models\Project;
 use App\Models\Tissu;
-use App\Models\tissuType;
+use App\Models\TissuType;
 use App\Models\ToBuyList;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -38,12 +38,16 @@ class DatabaseSeeder extends Seeder
         $user->is_superadmin = true;
         $user->save();
 
-        $tissuType = new tissuType;
+        $tissuType = new TissuType;
         $tissuType->name = "jean";
         $tissuType->save();
 
+        $tissuType2 = new TissuType;
+        $tissuType2->name = "coton";
+        $tissuType2->save();
+
         $tissu = new Tissu;
-        $tissu->name = "Nom du tissu";
+        $tissu->name = "Tissu 1";
         $tissu->material = "coton";
         $tissu->weight = 300; // g/m2
         $tissu->laize = 2; // (largeur en m)
@@ -61,6 +65,46 @@ class DatabaseSeeder extends Seeder
         $tissu->user_id = $user->id;
         $tissu->tissu_type_id = $tissuType->id;
         $tissu->save();
+
+        $tissu2 = new Tissu;
+        $tissu2->name = "tissu 2";
+        $tissu2->material = "coton";
+        $tissu2->weight = 300; // g/m2
+        $tissu2->laize = 2; // (largeur en m)
+        $tissu2->price = 10; // (en euros/m et en euros/10cm)
+        $tissu2->stock = 0; // (en m)
+        $tissu2->by_on = "mercerie Dupont";
+        $tissu2->scrap = true;
+        $tissu2->pre_wash = false;
+        $tissu2->oekotex = true;
+        $tissu2->bio = true;
+        $tissu2->rating = 4;
+        $tissu2->comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Provident voluptas id eum aperiam, iure delectus corrupti cum facere nemo earum
+                            asperiores officiis autem voluptates suscipit ipsum doloribus repudiandae minima! Debitis!";
+        $tissu2->user_id = $user->id;
+        $tissu2->tissu_type_id = $tissuType2->id;
+        $tissu2->save();
+
+        $tissu3 = new Tissu;
+        $tissu3->name = "tissu 3";
+        $tissu3->material = "coton";
+        $tissu3->weight = 300; // g/m2
+        $tissu3->laize = 3; // (largeur en m)
+        $tissu3->price = 10; // (en euros/m et en euros/10cm)
+        $tissu3->stock = 5; // (en m)
+        $tissu3->by_on = "mercerie Dupont";
+        $tissu3->scrap = true;
+        $tissu3->pre_wash = false;
+        $tissu3->oekotex = true;
+        $tissu3->bio = true;
+        $tissu3->rating = 3;
+        $tissu3->comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Provident voluptas id eum aperiam, iure delectus corrupti cum facere nemo earum
+                            asperiores officiis autem voluptates suscipit ipsum doloribus repudiandae minima! Debitis!";
+        $tissu3->user_id = $user->id;
+        $tissu3->tissu_type_id = $tissuType2->id;
+        $tissu3->save();
 
         $pattern = new Pattern;
         $pattern->name = "Nom du patron";
