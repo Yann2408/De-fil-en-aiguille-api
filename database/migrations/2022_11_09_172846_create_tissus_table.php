@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('pre_wash');
             $table->boolean('oekotex');
             $table->boolean('bio');
-            $table->integer('rating');
+            $table->double('rating', 2,1);
             $table->text('comment')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('tissu_type_id')->constrained('tissu_types');

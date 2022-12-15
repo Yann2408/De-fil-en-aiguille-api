@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
         $tissu->name = "Tissu 1";
         $tissu->material = "coton";
         $tissu->weight = 300; // g/m2
-        $tissu->laize = 2; // (largeur en m)
+        $tissu->laize = 2; // (largeur en cm)
         $tissu->price = 10; // (en euros/m et en euros/10cm)
         $tissu->stock = 1; // (en m)
         $tissu->by_on = "mercerie Dupont";
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
         $tissu->pre_wash = false;
         $tissu->oekotex = true;
         $tissu->bio = true;
-        $tissu->rating = 4;
+        $tissu->rating = 4.5;
         $tissu->comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Provident voluptas id eum aperiam, iure delectus corrupti cum facere nemo earum
                             asperiores officiis autem voluptates suscipit ipsum doloribus repudiandae minima! Debitis!";
