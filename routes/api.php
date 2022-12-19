@@ -41,6 +41,9 @@ Route::group(
             ['prefix' => '/tissus'],
             function ($router) {
                 Route::get('/', [TissuController::class, 'getTissus']);
+                Route::get('/{id}', [TissuController::class, 'getTissu']);
+                Route::post('/', [TissuController::class, 'storeTissu']);
+                Route::delete('/', [TissuController::class, 'deleteTissu']);
             }
         );
 
