@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tissu;
+use App\Models\TissuType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -45,13 +46,12 @@ class TissuController extends Controller
             [
                 'id'                => 'sometimes|exists:tissus,id',
                 'name'              => 'required|string',
-                'tissu_type.id'     => 'required|numeric|exists:tissu_types',
+                'tissu_type'        => 'required|string',
                 'weight'            => 'required|numeric',
                 'laize'             => 'required|numeric',
                 'price'             => 'required|numeric',
                 'stock'             => 'required|numeric',
                 'by_on'             => 'required|string',
-                'scrap'             => 'required|boolean',
                 'oekotex'           => 'required|boolean',
                 'bio'               => 'required|boolean',
                 'pre_wash'          => 'required|boolean',
@@ -63,6 +63,8 @@ class TissuController extends Controller
         if ($validator->fails() === true) {
             return response()->json($validator->errors(), 400);
         }
+
+        $tissuType = TissuType::where('name', $request->tissu_type)-> first();
 
         if (isset($request->id) === true) {
             $tissu = Tissu::whereId($request->id)->first();
@@ -76,14 +78,14 @@ class TissuController extends Controller
         $tissu->price = $request->price;
         $tissu->stock = $request->stock;
         $tissu->by_on = $request->by_on;
-        $tissu->scrap = $request->scrap;
         $tissu->oekotex = $request->oekotex;
         $tissu->bio = $request->bio;
         $tissu->pre_wash = $request->pre_wash;
         $tissu->rating = $request->rating;
         $tissu->comment = $request->comment;
+        $tissu->tissu_type_id = $tissuType->id;
         $tissu->save();
 
-        return response()->json($tissu, 200);
+        return response()->json($request->all(), 200);
     }
 }

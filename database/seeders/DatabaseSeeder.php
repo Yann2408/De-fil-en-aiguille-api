@@ -54,7 +54,6 @@ class DatabaseSeeder extends Seeder
         $tissu->price = 10; // (en euros/m et en euros/10cm)
         $tissu->stock = 1; // (en m)
         $tissu->by_on = "mercerie Dupont";
-        $tissu->scrap = true;
         $tissu->pre_wash = false;
         $tissu->oekotex = true;
         $tissu->bio = true;
@@ -74,7 +73,6 @@ class DatabaseSeeder extends Seeder
         $tissu2->price = 10; // (en euros/m et en euros/10cm)
         $tissu2->stock = 0; // (en m)
         $tissu2->by_on = "mercerie Dupont";
-        $tissu2->scrap = true;
         $tissu2->pre_wash = false;
         $tissu2->oekotex = true;
         $tissu2->bio = true;
@@ -94,7 +92,6 @@ class DatabaseSeeder extends Seeder
         $tissu3->price = 10; // (en euros/m et en euros/10cm)
         $tissu3->stock = 5; // (en m)
         $tissu3->by_on = "mercerie Dupont";
-        $tissu3->scrap = true;
         $tissu3->pre_wash = false;
         $tissu3->oekotex = true;
         $tissu3->bio = true;

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('stock');
             $table->string('by_on');
-            $table->boolean('scrap');
             $table->boolean('pre_wash');
             $table->boolean('oekotex');
             $table->boolean('bio');
