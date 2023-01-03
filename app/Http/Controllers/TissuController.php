@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Tissu;
 use App\Models\TissuType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class TissuController extends Controller
 {
 
-    public function getTissus()
+    public function getTissus(Request $request)
     {
-        $tissus = Tissu::with('tissu_type')->get();
+        $user = User::whereId($request->user()->id)->first();
+
+        $tissus = Tissu::where('user_id',$user->id)->with('tissu_type')->get();
 
         return response()->json($tissus, 200);
     }
@@ -32,7 +35,10 @@ class TissuController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $tissu = Tissu::with('tissu_type')->where('id',$request->id)->first();
+        $user = User::whereId($request->user()->id)->first();
+
+        $tissu = Tissu::with('tissu_type')->where('user_id',$user->id)->where('id',$request->id)->first();
+        // $tissu = Tissu::with('tissu_type')->where('id',$request->id)->first();
 
         return response()->json($tissu, 200);
     }
@@ -44,19 +50,21 @@ class TissuController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'id'                => 'sometimes|exists:tissus,id',
-                'name'              => 'required|string',
-                'tissu_type'        => 'required|string',
-                'weight'            => 'required|numeric',
-                'laize'             => 'required|numeric',
-                'price'             => 'required|numeric',
-                'stock'             => 'required|numeric',
-                'by_on'             => 'required|string',
-                'oekotex'           => 'required|boolean',
-                'bio'               => 'required|boolean',
-                'pre_wash'          => 'required|boolean',
-                'rating'            => 'required|numeric',
-                'comment'           => 'nullable|string',
+                'id'                    => 'sometimes|exists:tissus,id',
+                'name'                  => 'required|string',
+                'tissu_type'            => 'nullable|required_without:new_tissu_type|string',
+                'new_tissu_type'        => 'nullable|required_without:tissu_type|string',
+                'weight'                => 'required|numeric',
+                'laize'                 => 'required|numeric',
+                'price'                 => 'required|numeric',
+                'stock'                 => 'required|numeric',
+                'by_on'                 => 'required|string',
+                'oekotex'               => 'required|boolean',
+                'bio'                   => 'required|boolean',
+                'pre_wash'              => 'required|boolean',
+                'rating'                => 'required|numeric',
+                'comment'               => 'nullable|string',
+                'user_id'               => 'required|numeric|exists:users,id'
             ]
         );
 
@@ -64,12 +72,13 @@ class TissuController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $tissuType = TissuType::where('name', $request->tissu_type)-> first();
 
         if (isset($request->id) === true) {
             $tissu = Tissu::whereId($request->id)->first();
+            $tissuType = TissuType::where('name', $request->tissu_type)-> first();
         } else {
             $tissu = new Tissu;
+            $tissuType = TissuType::where('name', $request->new_tissu_type)-> first();
         }
 
         $tissu->name = $request->name;
@@ -84,8 +93,29 @@ class TissuController extends Controller
         $tissu->rating = $request->rating;
         $tissu->comment = $request->comment;
         $tissu->tissu_type_id = $tissuType->id;
+        $tissu->user_id = $request->user_id;
         $tissu->save();
 
         return response()->json($request->all(), 200);
+    }
+
+    public function deleteTissu(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            ['id' => 'sometimes|numeric|exists:tissus,id']
+        );
+
+        if ($validator->fails() === true) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $tissu = Tissu::find($request->id);
+
+        if (isset($tissu) === true) {
+            $tissu->delete();
+        };
+
+        return response()->json(['success' => true, 'data' => $tissu], 200);
     }
 }

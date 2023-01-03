@@ -38,6 +38,14 @@ class DatabaseSeeder extends Seeder
         $user->is_superadmin = true;
         $user->save();
 
+        $user2 = new User;
+        $user2->firstname = "Olivier";
+        $user2->lastname = "Giroud";
+        $user2->email = "olivier.giroud@gmail.com";
+        $user2->password = Hash::make('1234');
+        $user2->is_superadmin = false;
+        $user2->save();
+
         $tissuType = new TissuType;
         $tissuType->name = "jean";
         $tissuType->save();
@@ -48,7 +56,6 @@ class DatabaseSeeder extends Seeder
 
         $tissu = new Tissu;
         $tissu->name = "Tissu 1";
-        $tissu->material = "coton";
         $tissu->weight = 300; // g/m2
         $tissu->laize = 2; // (largeur en cm)
         $tissu->price = 10; // (en euros/m et en euros/10cm)
@@ -67,7 +74,6 @@ class DatabaseSeeder extends Seeder
 
         $tissu2 = new Tissu;
         $tissu2->name = "tissu 2";
-        $tissu2->material = "coton";
         $tissu2->weight = 300; // g/m2
         $tissu2->laize = 2; // (largeur en m)
         $tissu2->price = 10; // (en euros/m et en euros/10cm)
@@ -86,7 +92,6 @@ class DatabaseSeeder extends Seeder
 
         $tissu3 = new Tissu;
         $tissu3->name = "tissu 3";
-        $tissu3->material = "coton";
         $tissu3->weight = 300; // g/m2
         $tissu3->laize = 3; // (largeur en m)
         $tissu3->price = 10; // (en euros/m et en euros/10cm)
@@ -102,6 +107,24 @@ class DatabaseSeeder extends Seeder
         $tissu3->user_id = $user->id;
         $tissu3->tissu_type_id = $tissuType2->id;
         $tissu3->save();
+
+        $tissu4 = new Tissu;
+        $tissu4->name = "tissu 4";
+        $tissu4->weight = 400; // g/m2
+        $tissu4->laize = 4; // (largeur en m)
+        $tissu4->price = 10; // (en euros/m et en euros/10cm)
+        $tissu4->stock = 5; // (en m)
+        $tissu4->by_on = "internet";
+        $tissu4->pre_wash = false;
+        $tissu4->oekotex = true;
+        $tissu4->bio = true;
+        $tissu4->rating = 4;
+        $tissu4->comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Provident voluptas id eum aperiam, iure delectus corrupti cum facere nemo earum
+                            asperiores officiis autem voluptates suscipit ipsum doloribus repudiandae minima! Debitis!";
+        $tissu4->user_id = $user2->id;
+        $tissu4->tissu_type_id = $tissuType2->id;
+        $tissu4->save();
 
         $pattern = new Pattern;
         $pattern->name = "Nom du patron";
