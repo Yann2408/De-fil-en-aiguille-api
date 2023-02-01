@@ -46,7 +46,7 @@ Route::prefix('auth')->group(
             function ($router) {
 
                 Route::get(
-                    '/profile',
+                    '/me',
                     [
                         UserController::class,
                         'getMe',

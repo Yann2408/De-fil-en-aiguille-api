@@ -10,8 +10,8 @@ use App\Models\Pattern;
 use App\Models\Person_measurement;
 use App\Models\Project;
 use App\Models\Tissu;
-use App\Models\tissu_type;
-use App\Models\To_buy_list;
+use App\Models\TissuType;
+use App\Models\ToBuyList;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -38,29 +38,93 @@ class DatabaseSeeder extends Seeder
         $user->is_superadmin = true;
         $user->save();
 
-        $tissuType = new tissu_type;
+        $user2 = new User;
+        $user2->firstname = "Olivier";
+        $user2->lastname = "Giroud";
+        $user2->email = "olivier.giroud@gmail.com";
+        $user2->password = Hash::make('1234');
+        $user2->is_superadmin = false;
+        $user2->save();
+
+        $tissuType = new TissuType;
         $tissuType->name = "jean";
         $tissuType->save();
 
+        $tissuType2 = new TissuType;
+        $tissuType2->name = "coton";
+        $tissuType2->save();
+
         $tissu = new Tissu;
-        $tissu->name = "Nom du tissu";
-        $tissu->material = "coton";
+        $tissu->name = "Tissu 1";
         $tissu->weight = 300; // g/m2
-        $tissu->laize = 2; // (largeur en m)
+        $tissu->laize = 2; // (largeur en cm)
         $tissu->price = 10; // (en euros/m et en euros/10cm)
         $tissu->stock = 1; // (en m)
         $tissu->by_on = "mercerie Dupont";
-        $tissu->scrap = true;
         $tissu->pre_wash = false;
         $tissu->oekotex = true;
         $tissu->bio = true;
-        $tissu->rating = 4;
+        $tissu->rating = 4.5;
         $tissu->comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Provident voluptas id eum aperiam, iure delectus corrupti cum facere nemo earum
                             asperiores officiis autem voluptates suscipit ipsum doloribus repudiandae minima! Debitis!";
         $tissu->user_id = $user->id;
         $tissu->tissu_type_id = $tissuType->id;
         $tissu->save();
+
+        $tissu2 = new Tissu;
+        $tissu2->name = "tissu 2";
+        $tissu2->weight = 300; // g/m2
+        $tissu2->laize = 2; // (largeur en m)
+        $tissu2->price = 10; // (en euros/m et en euros/10cm)
+        $tissu2->stock = 0; // (en m)
+        $tissu2->by_on = "mercerie Dupont";
+        $tissu2->pre_wash = false;
+        $tissu2->oekotex = true;
+        $tissu2->bio = true;
+        $tissu2->rating = 4;
+        $tissu2->comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Provident voluptas id eum aperiam, iure delectus corrupti cum facere nemo earum
+                            asperiores officiis autem voluptates suscipit ipsum doloribus repudiandae minima! Debitis!";
+        $tissu2->user_id = $user->id;
+        $tissu2->tissu_type_id = $tissuType2->id;
+        $tissu2->save();
+
+        $tissu3 = new Tissu;
+        $tissu3->name = "tissu 3";
+        $tissu3->weight = 300; // g/m2
+        $tissu3->laize = 3; // (largeur en m)
+        $tissu3->price = 10; // (en euros/m et en euros/10cm)
+        $tissu3->stock = 5; // (en m)
+        $tissu3->by_on = "mercerie Dupont";
+        $tissu3->pre_wash = false;
+        $tissu3->oekotex = true;
+        $tissu3->bio = true;
+        $tissu3->rating = 3;
+        $tissu3->comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Provident voluptas id eum aperiam, iure delectus corrupti cum facere nemo earum
+                            asperiores officiis autem voluptates suscipit ipsum doloribus repudiandae minima! Debitis!";
+        $tissu3->user_id = $user->id;
+        $tissu3->tissu_type_id = $tissuType2->id;
+        $tissu3->save();
+
+        $tissu4 = new Tissu;
+        $tissu4->name = "tissu 4";
+        $tissu4->weight = 400; // g/m2
+        $tissu4->laize = 4; // (largeur en m)
+        $tissu4->price = 10; // (en euros/m et en euros/10cm)
+        $tissu4->stock = 5; // (en m)
+        $tissu4->by_on = "internet";
+        $tissu4->pre_wash = false;
+        $tissu4->oekotex = true;
+        $tissu4->bio = true;
+        $tissu4->rating = 4;
+        $tissu4->comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Provident voluptas id eum aperiam, iure delectus corrupti cum facere nemo earum
+                            asperiores officiis autem voluptates suscipit ipsum doloribus repudiandae minima! Debitis!";
+        $tissu4->user_id = $user2->id;
+        $tissu4->tissu_type_id = $tissuType2->id;
+        $tissu4->save();
 
         $pattern = new Pattern;
         $pattern->name = "Nom du patron";
@@ -127,7 +191,7 @@ class DatabaseSeeder extends Seeder
         $category3->user_id = $user->id;
         $category3->save();
 
-        $toBuyList = new To_buy_list;
+        $toBuyList = new ToBuyList;
         $toBuyList->name = "tissu bleu";
         $toBuyList->quantity = 3;
         $toBuyList->shop = "mercerie du centre ville";

@@ -16,17 +16,15 @@ return new class extends Migration
         Schema::create('tissus', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('material');
             $table->integer('weight');
             $table->integer('laize');
             $table->integer('price');
             $table->integer('stock');
             $table->string('by_on');
-            $table->boolean('scrap');
             $table->boolean('pre_wash');
             $table->boolean('oekotex');
             $table->boolean('bio');
-            $table->integer('rating');
+            $table->double('rating', 2,1);
             $table->text('comment')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('tissu_type_id')->constrained('tissu_types');

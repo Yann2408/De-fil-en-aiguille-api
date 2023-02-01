@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('support', ['pdf', 'paper', 'magazine']);
             $table->string('clothing_type');
             $table->string('silhouette');
-            $table->integer('rating');
+            $table->double('rating', 2,1);
             $table->text('comment')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
