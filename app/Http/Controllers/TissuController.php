@@ -38,7 +38,6 @@ class TissuController extends Controller
         $user = User::whereId($request->user()->id)->first();
 
         $tissu = Tissu::with('tissu_type')->where('user_id',$user->id)->where('id',$request->id)->first();
-        // $tissu = Tissu::with('tissu_type')->where('id',$request->id)->first();
 
         return response()->json($tissu, 200);
     }
@@ -46,7 +45,6 @@ class TissuController extends Controller
 
     public function storeTissu(Request $request)
     {
-
         $validator = Validator::make(
             $request->all(),
             [
@@ -71,7 +69,6 @@ class TissuController extends Controller
         if ($validator->fails() === true) {
             return response()->json($validator->errors(), 400);
         }
-
 
         if (isset($request->id) === true) {
             $tissu = Tissu::whereId($request->id)->first();
