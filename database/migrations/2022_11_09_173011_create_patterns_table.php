@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('brand');
-            $table->enum('support', ['pdf', 'paper', 'magazine']);
+            $table->enum('support', ['pdf', 'pochette', 'magazine']);
             $table->string('clothing_type');
             $table->string('silhouette');
             $table->double('rating', 2,1);

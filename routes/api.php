@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TissuController;
+use App\Http\Controllers\PatternController;
 use App\Http\Controllers\TissuTypeController;
 
 /*
@@ -51,6 +52,16 @@ Route::group(
             ['prefix' => '/tissu-types'],
             function ($router) {
                 Route::get('/', [TissuTypeController::class, 'getTissuTypes']);
+            }
+        );
+
+        Route::group(
+            ['prefix' => '/patterns'],
+            function ($router) {
+                Route::get('/', [PatternController::class, 'getPatterns']);
+                Route::get('/{id}', [PatternController::class, 'getPattern']);
+                Route::post('/', [PatternController::class, 'storePattern']);
+                Route::delete('/', [PatternController::class, 'deletePattern']);
             }
         );
     }
