@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Pattern;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Mockery\Undefined;
 
 class PatternController extends Controller
 {
@@ -48,7 +49,8 @@ class PatternController extends Controller
                 'id'                    => 'sometimes|exists:patterns,id',
                 'name'                  => 'required|string',
                 'brand'                 => 'required|string',
-                'support'               => ['required', Rule::in(['pdf', 'pochette', 'magazine'])],
+                'support'               => 'nullable|required_without:newSupport', Rule::in(['pdf', 'pochette', 'magazine']),
+                'newSupport'            => 'nullable|required_without:support', Rule::in(['pdf', 'pochette', 'magazine']),
                 'clothing_type'         => 'required|string',
                 'silhouette'            => 'required|string',
                 'rating'                => 'required|numeric',
@@ -69,7 +71,7 @@ class PatternController extends Controller
 
         $pattern->name              = $request->name;
         $pattern->brand             = $request->brand;
-        $pattern->support           = $request->support;
+        $pattern->support           = $request->support ? $request->support : $request->newSupport;
         $pattern->clothing_type     = $request->clothing_type;
         $pattern->silhouette        = $request->silhouette;
         $pattern->rating            = $request->rating;
